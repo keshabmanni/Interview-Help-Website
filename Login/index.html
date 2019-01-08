@@ -1,0 +1,197 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" lang="en"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    
+    <title>Demo Grid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    
+   
+</head>
+<body>
+    <div class="wrapper">
+        <!-- login and register bar-->
+        <div class="loginAndRegister">
+                <h3><a href="#" onclick="document.getElementById('modal-wrapper-login').style.display='block'" style="width:500px; margin-top:300px;">Login,</a>
+                <a href="#" onclick="document.getElementById('modal-wrapper-register').style.display='block'" style="width:500px; margin-top:300px;">Register</a></h3>
+        </div>
+
+        <!-- popup login form -->
+        <div id="modal-wrapper-login" class="modal">
+  
+            <form class="modal-content animate" action="/action_page.php">
+                  
+              <div class="imgcontainer">
+                <span onclick="document.getElementById('modal-wrapper-login').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                <h1 style="text-align:center">Login Here</h1>
+              </div>
+          
+              <div class="container-login">
+                <input type="text" placeholder="Enter Username" name="uname" id="luname" autofocus>
+                <input type="password" placeholder="Enter Password" id="lpsw" name="psw">        
+                <button onclick="login()" type="submit">Login</button>
+                <input type="checkbox"  style="margin:20px 0px 20px 20px"><a class="rememberMe">Remember me</a>
+                <a href="#" class="forgotPassword" >Forgot Password ?</a>
+              </div>
+            </form>  
+          </div>
+
+          <!-- popup register form -->
+        <div id="modal-wrapper-register" class="modal">
+  
+            <form class="modal-content animate" method="POST">      
+              <div class="imgcontainer">
+                <span onclick="document.getElementById('modal-wrapper-register').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                <h1 style="text-align:center">Register Here</h1>
+              </div>
+          
+              <div class="container-register">
+                <input type="text" placeholder="First Name" name="fname" autofocus>
+                <input type="text" placeholder="Last Name" name="lname">
+
+                <div class="userType">
+                    <a class="ss"> User Type</a>
+                    <input type="radio" name="userType" value="faculty" >Faculty
+
+                    <input type="radio" name="userType" value="student" id="userType-student" onselect="showHide()">
+                    <label for="userType-student">Student</label>
+                        <div class="hide" id="hide">
+                            <input type="radio" name="year" value="senior" id="year-senior">Senior
+                            <input type="radio" name="year" value="junior" id="year-junior">Junior
+                        </div>
+                </div>
+
+                </div>
+                <input type="text" placeholder="Userame" name="uname" id="runame">
+                <input type="password" placeholder="New Password" name="npsw" id="rpsw">
+                <input type="password" placeholder="Confirm Password" name="cpsw">    
+                <button onclick="register()" type="submit" >Register</button> 
+              </div>                     
+            </form>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="main-nav" id="myTopnav">
+            <a href="#Home" class="active">Home</a>
+            <a href="#ContactUs">Contact</a>
+            <a href="#About">About</a>
+            <a href="#Services">Services</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars fa-2x"></i>
+            </a>
+        </nav>
+
+        
+
+        <!-- Grid View of companies -->
+        <section class="boxes">
+            <div class="box">
+                <i class="fab fa-windows fa-4x"></i>
+                <h3>Microsoft</h3>
+                <p>Microsoft Company</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                    <i class="fab fa-google fa-4x"></i>
+                    <h3>Google</h3>
+                    <p>Google Company</p>
+                    <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                    <i class="fab fa-facebook-f fa-4x"></i>
+                    <h3>Facebook</h3>
+                    <p>Facebook Company</p>
+                    <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                    <i class="fab fa-amazon fa-4x"></i>
+                    <h3>Amazon</h3>
+                    <p>Amazon Company</p>
+                    <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                    <i class="fab fa-apple fa-4x"></i>
+                    <h3>Apple</h3>
+                    <p>Apple Company</p>
+                    <a href="#" class="btn">Read More</a>
+            </div>
+        </section>
+        <!-- Info Section -->
+        <section class="info">
+            <img src="img/Aditya.jpg" alt="">
+            <div>
+                <h2>Know more about our college</h2>
+                <p>
+                    Demo TextLorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam vel tempore maxime, repudiandae debitis deserunt a. Autem veritatis veniam, optio quia omnis non illo vel reiciendis necessitatibus temporibus corporis possimus.
+                    
+                </p>
+                <a href="https://www.aec.edu.in" class="btn">Visit Site</a>
+            </div>
+        </section>
+        <!-- footer -->
+        <footer>GridDemo &copy; 2018</footer>
+    </div>
+    <!-- Wrapper Ends -->
+
+    <!-- Function for dropdown menu -->
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "main-nav") {
+            x.className += " responsive";
+            } else {
+            x.className = "main-nav";
+            }
+        }
+    </script>
+
+    <!-- <script>
+        // If user clicks anywhere outside of the modal, Modal will close    
+        var modal = document.getElementById('modal-wrapper');
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script> -->
+
+    <!-- Show and hide options -->
+    <script type="text/javascript">
+    function showHide(){
+        var studentSelect=document.getElementById("userType-student");
+        var hideIt=document.getElementsByClassName("hide");
+        if(studentSelect.selected){
+            hideIt.style.display="block";
+        }
+        else{
+            hideIt.style.display="none";
+        }
+    }
+    </script>
+    
+
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyA29QfZcI9McnzorPf9X1vDsn-2aUJ5V3s",
+        authDomain: "project02-6374c.firebaseapp.com",
+        databaseURL: "https://project02-6374c.firebaseio.com",
+        projectId: "project02-6374c",
+        storageBucket: "project02-6374c.appspot.com",
+        messagingSenderId: "212019939413"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+    <script src="main.js"></script>
+</body>
+</html>

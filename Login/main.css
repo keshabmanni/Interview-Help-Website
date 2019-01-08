@@ -1,0 +1,367 @@
+/* css variable */
+:root {
+    --primary:#ddd;
+    --dark:#333;
+    --light:#fff;
+    --shadow:0 1px 5px rgba(104,104,104,0.9); 
+}
+
+html{
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--dark);
+}
+
+body{
+    background: #ccc;
+    margin: 2px;
+    line-height: 1.4;
+}
+.btn{
+    background: var(--dark);
+    color: var(--light);
+    padding: 0.6rem 1.3rem;
+    text-decoration: none;
+    border: 0;
+}
+img{
+    max-width: 100%;
+}
+.wrapper{
+    display: grid;
+    grid-gap: 20px;
+}
+
+/* Navigation Bar */
+.main-nav {
+    overflow: hidden;
+    background-color: #333;
+    margin: 0px 0px 10px 0px;
+}
+  
+.main-nav a {
+float: left;
+display: block;
+color: #f2f2f2;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+font-size: 18px;
+}
+
+.main-nav a:hover {
+background-color: #ddd;
+color: black;
+}
+
+.active {
+background-color: #4CAF50;
+color: white;
+}
+
+.main-nav .icon {
+display: none;
+padding: 8px 14px;
+}
+
+/* Login and Register bar */
+.loginAndRegister a{
+   color: black;
+}
+.loginAndRegister h3{
+    text-align: right;
+    margin: 0px;
+    background: rgb(255, 251, 251);
+    grid-template-columns: 1fr;
+    padding: 8px 8px;
+    text-shadow:var(--shadow); 
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    box-shadow: var(--shadow);
+}
+.loginAndRegister a:hover{
+    color: blue;
+    text-shadow: none;
+}
+
+/* Companies */
+.boxes{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+}
+.box{
+    background: var(--primary);
+    text-align: center;
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow);
+}
+
+/* Info */
+.info{
+    background: var(--primary);
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 3rem;
+    margin: 10px 0px 10px 0px;
+}
+/* Footer */
+footer{
+    margin-top: 2rem;
+    background: #333;
+    color: var(--light);
+    text-align: center;
+    padding: 0.5rem;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 700px) {
+    .main-nav a:not(:first-child) {display: none;}
+    .main-nav a.icon {
+      float: right;
+      display: block;
+    }
+    .info{
+        grid-template-columns: 1fr;
+    }
+    .info .btn{
+        display: block;
+        text-align: center;
+        margin: auto;
+    }
+    .loginAndRegister{
+        font-size: 14px;
+    }
+  }
+  
+  @media screen and (max-width: 700px) {
+    .main-nav.responsive {position: relative;}
+    .main-nav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+
+    }
+    .main-nav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+
+  @media(max-width:500px){
+      .main-nav a{
+          font-size: 15px;
+      }
+      .loginAndRegister{
+          font-size:  12px;
+          margin-left: 0px;
+      }
+  }
+
+  /* popup login form */
+
+  /* Full-width input fields */
+input[type=text], input[type=password],.userType {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 26px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+	font-size:16px;
+}
+
+
+/* Set a style for login button */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 26px;
+    border: none;
+    cursor: pointer;
+    width: 90%;
+	font-size:20px;
+}
+button:hover {
+    opacity: 0.8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+/* Remember me check-box */
+.rememberMe{
+    margin:20px 20px 0px 10px;
+}
+
+
+/* forgot password text */
+.forgotPassword{
+    text-decoration:none; 
+    float:right; 
+    margin-right:34px; 
+    margin-top:20px;
+}
+
+/* The Modal (background) */
+.modal {
+	display:none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 4% auto 15% auto;
+    border: 1px solid #888;
+    width: 40%; 
+    padding-bottom: 30px;
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+.close:hover,.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    animation: zoom 0.6s
+}
+
+
+@keyframes zoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Popup box width at different device-width  */
+@media screen and (max-width:1200px){
+    /* Popup box width */
+    .modal-content {
+        width: 50%; 
+    }
+}
+@media screen and (max-width:1000px){
+    /* Popup box width */
+    .modal-content {
+        width: 60%; 
+    }
+}
+@media screen and (max-width:700px){
+    /* Popup box width */
+    .modal-content {
+        width: 70%; 
+    }
+}
+@media screen and (max-width:550px){
+    /* Popup box width */
+    .modal-content {
+        width: 75%;
+    }
+}
+@media screen and (max-width:500px){
+    /* Popup box width */
+    .modal-content {
+        width: 80%;
+    }
+    input[type=text], input[type=password], button ,.userType,.studentYear{
+        font-size: 15px;
+    }
+   
+}
+
+@media(max-width:450px){
+    .forgotPassword{
+        display: block;
+        float: none;
+        margin: 0px 25px;
+        font-size: 13px;
+    }
+    .imgcontainer{
+        font-size: 12px;
+        margin-top: 20px;
+        padding-top: 0px;
+    }
+    .close{
+        font-size: 23px;
+        right: 20px;
+        margin-top: 0px;
+    }
+    input[type=text], input[type=password], button,.userType,.studentYear{
+        font-size: 14px;
+    }
+    .rememberMe{
+        font-size: 13px;
+    }
+}
+
+@media(max-width:350px){
+      /* Full-width input fields */
+    input[type=text], input[type=password],.userType,.studentYear {
+        width: relative;
+        padding: 10px 18px;
+        margin: 5px 15px;
+        font-size: 13px;
+    }
+    button{
+        width: relative;
+        padding: 10px 18px;
+        margin: 5px 15px;
+        font-size: 13px;
+    }
+    .forgotPassword{
+        clear: both;
+        margin-top: 0px;
+        float: left;
+        font-size: 12px;
+    }
+    .ss{
+        display: block;
+    }
+}
+
+
+.ss{
+    color: #888;
+}
+/* show this options for student only */
+.studentYear{
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 26px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+	font-size:16px;
+}
+.hide{
+    display:none;
+}
+
+
+
+/* options for */
