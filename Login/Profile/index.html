@@ -1,0 +1,107 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" lang="en"/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-functions.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <link rel="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+    
+    <title>Demo Grid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <!--For stickey nav bar at top-->
+    <script type="text/javascript">
+        $(window).on('scroll', function() {
+            $(window).scrollTop()? $('nav').addClass('black'):$('nav').removeClass('black');
+        });
+    </script>
+
+</head>
+<body>
+    <!-- login and register bar & nav bar-->
+    <div id="global-top-bar">
+        
+            <nav> 
+                <!--login bar-->
+                <div class="loginAndRegister">
+                    <h3>
+                        <div class="logged-in" style="display: none">
+                            <a style="margin-right: 5px" href="#" id="show-username" class="userprofilename"></a>
+                            <a  href="#" id="logout"><i title="Logout" class="fas fa-sign-out-alt"></i></a>
+                        </div>
+                        <div class="logged-out" style="display: none">
+                            <a href="#" onclick="document.getElementById('modal-wrapper-login').style.display='block'" >Login,</a>
+                            <a href="#" onclick="document.getElementById('modal-wrapper-register').style.display='block'">Register</a>
+                        </div>
+                    </h3>
+                </div>
+    
+                <!--Navigation Bar-->
+                <a class="burger-nav"></a>
+                <div class="logo">Interview Help</div>
+                <ul>
+                    <li><a href="https://project02-6374c.firebaseapp.com/" >Home</a></li>
+                    <li><a href="#Discuss">Discuss</a></li>
+                    <li><a href="#Profile" class="active">Profile</a></li>
+                    <li><a href="#About">About</a></li>
+                </ul>
+                
+            </nav>
+        </div>
+
+    <!-- User Profile -->
+    <div class="user-details" id="UserProfile">
+            <h4>User Details</h4>
+        <!-- ADMIN ACTIONS -->
+        <form class="admin-actions admin" style="margin: 40px auto; max-width: 300px; display: block;">
+            <input type="email" placeholder="Add admin's user email" id="admin-email" required />
+            <button class="btn">Make admin</button>
+        </form>
+        
+        <a style="margin-right: 5px" href="#" id="show-username" class="userprofilename"></a>
+    </div>
+
+    <!-- Function for dropdown menu -->
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "main-nav") {
+            x.className += " responsive";
+            } else {
+            x.className = "main-nav";
+            }
+        }
+    </script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA29QfZcI9McnzorPf9X1vDsn-2aUJ5V3s",
+            authDomain: "project02-6374c.firebaseapp.com",
+            databaseURL: "https://project02-6374c.firebaseio.com",
+            projectId: "project02-6374c"
+        };
+        firebase.initializeApp(config);
+
+        // make auth and firestore references
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const functions = firebase.functions();
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/main.js"></script>
+    <script src="/auth.js"></script>
+</body>
+</html>

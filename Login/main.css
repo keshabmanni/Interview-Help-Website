@@ -27,68 +27,113 @@ body{
 img{
     max-width: 100%;
 }
+
 .wrapper{
+    margin-top: 100px;
     display: grid;
     grid-gap: 20px;
 }
 
 /* Navigation Bar */
-.main-nav {
-    overflow: hidden;
-    background-color: #333;
-    margin: 0px 0px 10px 0px;
-}
-  
-.main-nav a {
-float: left;
-display: block;
-color: #f2f2f2;
-text-align: center;
-padding: 14px 16px;
-text-decoration: none;
-font-size: 18px;
+nav {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 90px;
+    box-sizing: border-box;
+    transition: .3s;
+    background-color: rgba(51, 51, 51, 0.856);
 }
 
-.main-nav a:hover {
-background-color: #ddd;
-color: black;
+nav.black{
+    background-color: rgba(51, 51, 51, 0.493);
 }
 
-.active {
-background-color: #4CAF50;
-color: white;
+nav .logo{
+    padding: 10px 20px;
+    height: 40px;
+    float: left;
+    font-size: 24px;
+    font-family: Satisfy, serif;
+    color: rgb(247, 74, 74);
+    text-shadow: 4px 4px 4px rgba(170, 170, 170, 0.5);
+    transition: .3s;
 }
 
-.main-nav .icon {
-display: none;
-padding: 8px 14px;
+nav ul{
+    list-style: none;
+    float: right;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li{
+    list-style: none;
+}
+
+nav ul li a{
+    line-height: 60px;
+    color: #fff;
+    padding: 12px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+nav.black ul li a{
+    color: #fff;
+}
+
+nav ul li a:hover {
+    color: black;
+    font-size: 120%; 
+    outline: none;
+}
+
+nav ul li a.active {
+    background: #4CAF50;
+    border-radius: 6px;
 }
 
 /* Login and Register bar */
 .loginAndRegister a{
    color: black;
 }
+
+.fa-sign-out-alt:before {
+    content: "\f2f5";
+    color: rgba(248, 1, 1, 0.712);
+    padding: 5px;
+    box-align: right;
+}
+
+.fa-plus-square{
+    color: rgba(77, 77, 77, 0.562);
+}
+.fa-plus-square:hover{
+    color: #000;
+}
+
 .loginAndRegister h3{
     text-align: right;
     margin: 0px;
     background: rgb(255, 251, 251);
     grid-template-columns: 1fr;
-    padding: 8px 8px;
+    padding: 8px 8px 0px 8px;
     text-shadow:var(--shadow); 
     font-family: Arial, Helvetica, sans-serif;
     display: block;
     box-shadow: var(--shadow);
 }
-.loginAndRegister a:hover{
-    color: blue;
+.loginAndRegister h3 a:hover{
     text-shadow: none;
 }
-
 /* Companies */
 .boxes{
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(200px,32%));
 }
 .box{
     background: var(--primary);
@@ -116,14 +161,15 @@ footer{
     padding: 0.5rem;
 }
 
+/* error */
+.error{
+    color: red;
+    text-align: center;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 700px) {
-    .main-nav a:not(:first-child) {display: none;}
-    .main-nav a.icon {
-      float: right;
-      display: block;
-    }
     .info{
         grid-template-columns: 1fr;
     }
@@ -135,37 +181,60 @@ footer{
     .loginAndRegister{
         font-size: 14px;
     }
-  }
-  
-  @media screen and (max-width: 700px) {
-    .main-nav.responsive {position: relative;}
-    .main-nav.responsive .icon {
-      position: absolute;
-      right: 0;
-      top: 0;
+}
 
+@media screen and (max-width:500px){
+    .burger-nav {
+        height: 35px;
+        width: 35px;
+        background: url(img/bars-solid.svg) no-repeat 98% ;
+        fill: #ccc;
+        float: right;
+        color: #fefefe;
+        margin: 10px;
+        cursor: pointer;
     }
-    .main-nav.responsive a {
-      float: none;
-      display: block;
-      text-align: left;
+    nav {
+        height: 85px;
+        transition: .3s;
     }
-  }
+    nav ul {
+        overflow: hidden;
+        background: rgba(51, 51, 51, 0.493);
+        height: 0;
+        
+    }
+    nav ul.open{
+        height: auto;
+    }
+    nav ul {
+        float: none;
+        display: block;
+        width: 100%;
+    }
+    nav ul li{
+        width: 100%;
+        text-align: left;
+        margin: 0;
+    }
+    nav ul li a{
+        display: block;
+        border-bottom: 1px solid wheat;
+        margin: 0;
+    }
 
-  @media(max-width:500px){
-      .main-nav a{
-          font-size: 15px;
-      }
-      .loginAndRegister{
-          font-size:  12px;
-          margin-left: 0px;
-      }
-  }
+    .loginAndRegister{
+        font-size:  12px;
+        margin-left: 0px;
+    }
+    
+}
+
 
   /* popup login form */
 
   /* Full-width input fields */
-input[type=text], input[type=password],.userType {
+input[type=email], input[type=password], input[type=text],.userType, .bio-text {
     width: 90%;
     padding: 12px 20px;
     margin: 8px 26px;
@@ -264,11 +333,17 @@ button:hover {
     .modal-content {
         width: 50%; 
     }
+    .boxes{
+        grid-template-columns: repeat(auto-fit,minmax(200px,32%));
+    }
 }
 @media screen and (max-width:1000px){
     /* Popup box width */
     .modal-content {
         width: 60%; 
+    }
+    .boxes{
+        grid-template-columns: repeat(auto-fit,minmax(200px,48%));
     }
 }
 @media screen and (max-width:700px){
@@ -276,22 +351,26 @@ button:hover {
     .modal-content {
         width: 70%; 
     }
+    
 }
 @media screen and (max-width:550px){
     /* Popup box width */
     .modal-content {
         width: 75%;
     }
+    
 }
 @media screen and (max-width:500px){
     /* Popup box width */
     .modal-content {
         width: 80%;
     }
-    input[type=text], input[type=password], button ,.userType,.studentYear{
+    input[type=email], input[type=password], input[type=text], button ,.bio-text{
         font-size: 15px;
     }
-   
+    .boxes{
+        grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    }
 }
 
 @media(max-width:450px){
@@ -311,7 +390,7 @@ button:hover {
         right: 20px;
         margin-top: 0px;
     }
-    input[type=text], input[type=password], button,.userType,.studentYear{
+    input[type=email], input[type=password], input[type=text], button, .bio-text{
         font-size: 14px;
     }
     .rememberMe{
@@ -321,7 +400,7 @@ button:hover {
 
 @media(max-width:350px){
       /* Full-width input fields */
-    input[type=text], input[type=password],.userType,.studentYear {
+    input[type=email], input[type=password], input[type=text], .bio-text {
         width: relative;
         padding: 10px 18px;
         margin: 5px 15px;
@@ -345,23 +424,3 @@ button:hover {
 }
 
 
-.ss{
-    color: #888;
-}
-/* show this options for student only */
-.studentYear{
-    width: 90%;
-    padding: 12px 20px;
-    margin: 8px 26px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-	font-size:16px;
-}
-.hide{
-    display:none;
-}
-
-
-
-/* options for */

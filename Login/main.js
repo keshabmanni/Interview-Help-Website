@@ -1,41 +1,58 @@
 
-function login(){
-    var email=document.getElementById(luname).value;
-    var password=document.getElementById(lpsw).value;
+$(document).ready(function() {
+  $(".burger-nav").on("click",function() {
+    $("nav ul").toggleClass("open");
+  });
+});
+// DOM elements
+const userDetails = document.querySelector('.user-details');
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+const loggedInLinks = document.querySelectorAll('.logged-in');
+const accountDetails = document.querySelector('.userprofilename');
+const adminItems = document.querySelectorAll('.admin');
 
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        Window.alert("Error:" +errorMessage);
+const setupUI = (user) => {
+  if (user) {
+    if (user.admin) {
+      adminItems.forEach(item => item.style.display = 'block');
+    }
+    // account info
+    db.collection('users').doc(user.uid).get().then(doc => {
+      /*
+      const html = `
+        ${user.email}
+        ${user.admin ? 'Admin' : ''}
+      `; */
+      accountDetails.innerHTML =user.email;
     });
+    // toggle user UI elements
+    loggedInLinks.forEach(item => item.style.display = 'block');
+    loggedOutLinks.forEach(item => item.style.display = 'none');
 
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          var user = firebase.auth().currentUser;
-            Window.alert("Signe din");
+  } else {
+    // clear account info
+    accountDetails.innerHTML = '';
+    // toggle user elements
+    adminItems.forEach(item => item.style.display = 'none');
+    loggedInLinks.forEach(item => item.style.display = 'none');
+    loggedOutLinks.forEach(item => item.style.display = 'block');
+  }
+};
 
-        } else {
-          // No user is signed in.
-          Window.alert("User not signed in");
-        }
-      });
+// setup guides
+const setupGuides = (data) => {
 
-    
-    
-}
-function register(){
-    var remail=document.getElementById(runame).value;
-    var rpassword=document.getElementById(rpsw).value;
-
-    firebase.auth().createUserWithEmailAndPassword(remail, rpassword).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        Window.alert("Error:" +errorMessage);
-        // ...
+  if (data.length) {
+    let html = '';
+    data.forEach(doc => {
+      const guide = doc.data();
+      const li = 
+        guide.title+content;
+        //guide.content;
+      html += li;
     });
-    Window,alert("You are registered in");
-    
-}
+    guideList.innerHTML = html
+  } else {
+    guideList.innerHTML = '<h5 class="center-align">Login to view guides</h5>';
+  }
+};

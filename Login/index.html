@@ -5,30 +5,69 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
-    
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-functions.js"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <link rel="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
     
     <title>Demo Grid</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
     
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <!--For stickey nav bar at top-->
+    <script type="text/javascript">
+        $(window).on('scroll', function() {
+            $(window).scrollTop()? $('nav').addClass('black'):$('nav').removeClass('black');
+        });
+    </script>
    
 </head>
 <body>
-    <div class="wrapper">
-        <!-- login and register bar-->
-        <div class="loginAndRegister">
-                <h3><a href="#" onclick="document.getElementById('modal-wrapper-login').style.display='block'" style="width:500px; margin-top:300px;">Login,</a>
-                <a href="#" onclick="document.getElementById('modal-wrapper-register').style.display='block'" style="width:500px; margin-top:300px;">Register</a></h3>
-        </div>
+    <!-- login and register bar & nav bar-->
+    <div id="global-top-bar">
+        
+        <nav> 
+            <!--login bar-->
+            <div class="loginAndRegister">
+                <h3>
+                    <div class="logged-in" style="display: none">
+                        <a style="margin-right: 5px" href="#" id="show-username" class="userprofilename"></a>
+                        <a  href="#" id="logout"><i title="Logout" class="fas fa-sign-out-alt"></i></a>
+                    </div>
+                    <div class="logged-out" style="display: none">
+                        <a href="#" onclick="document.getElementById('modal-wrapper-login').style.display='block'" >Login,</a>
+                        <a href="#" onclick="document.getElementById('modal-wrapper-register').style.display='block'">Register</a>
+                    </div>
+                </h3>
+            </div>
 
+            <!--Navigation Bar-->
+            <a class="burger-nav"></a>
+            <div class="logo">Interview Help</div>
+            <ul>
+                <li><a href="#Home" class="active">Home</a></li>
+                <li><a href="#Discuss">Discuss</a></li>
+                <li><a href="https://project02-6374c.firebaseapp.com/Profile">Profile</a></li>
+                <li><a href="#About">About</a></li>
+            </ul>
+            
+        </nav>
+
+        
+    </div>
+
+    <div class="wrapper">
         <!-- popup login form -->
         <div id="modal-wrapper-login" class="modal">
   
-            <form class="modal-content animate" action="/action_page.php">
+            <form class="modal-content animate" id="login-form">
                   
               <div class="imgcontainer">
                 <span onclick="document.getElementById('modal-wrapper-login').style.display='none'" class="close" title="Close PopUp">&times;</span>
@@ -36,95 +75,90 @@
               </div>
           
               <div class="container-login">
-                <input type="text" placeholder="Enter Username" name="uname" id="luname" autofocus>
-                <input type="password" placeholder="Enter Password" id="lpsw" name="psw">        
-                <button onclick="login()" type="submit">Login</button>
+                <input type="email" placeholder="Enter Email" name="uname" id="login-email" autofocus required>
+                <input type="password" placeholder="Enter Password" id="login-password" name="psw" required>         
+                <button onclick="document.getElementById('modal-wrapper-login').style.display='none'">Login</button>
                 <input type="checkbox"  style="margin:20px 0px 20px 20px"><a class="rememberMe">Remember me</a>
                 <a href="#" class="forgotPassword" >Forgot Password ?</a>
+                <p class="error"></p>
               </div>
             </form>  
-          </div>
+        </div>
 
-          <!-- popup register form -->
+        <!-- popup register form -->
         <div id="modal-wrapper-register" class="modal">
   
-            <form class="modal-content animate" method="POST">      
+            <form class="modal-content animate" id="signup-form">      
               <div class="imgcontainer">
-                <span onclick="document.getElementById('modal-wrapper-register').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                <span onclick="document.getElementById('modal-wrapper-register').style.display='none'" class="close" title="Close">&times;</span>
                 <h1 style="text-align:center">Register Here</h1>
               </div>
           
               <div class="container-register">
-                <input type="text" placeholder="First Name" name="fname" autofocus>
-                <input type="text" placeholder="Last Name" name="lname">
+                <input type="email" id="signup-email" placeholder="Email Address" name="fname" autofocus required>
 
-                <div class="userType">
-                    <a class="ss"> User Type</a>
+                <!--<div class="userType">
+                    <a class="ss" aria-required="true"> User Type</a>
                     <input type="radio" name="userType" value="faculty" >Faculty
-
-                    <input type="radio" name="userType" value="student" id="userType-student" onselect="showHide()">
+                    <input type="radio" name="userType" value="student" id="userType-student">
                     <label for="userType-student">Student</label>
-                        <div class="hide" id="hide">
-                            <input type="radio" name="year" value="senior" id="year-senior">Senior
-                            <input type="radio" name="year" value="junior" id="year-junior">Junior
-                        </div>
-                </div>
+                </div>-->
 
                 </div>
-                <input type="text" placeholder="Userame" name="uname" id="runame">
-                <input type="password" placeholder="New Password" name="npsw" id="rpsw">
-                <input type="password" placeholder="Confirm Password" name="cpsw">    
-                <button onclick="register()" type="submit" >Register</button> 
+                <input type="text" id="signup-username" placeholder="Userame" name="uname" id="runame" required>
+                <input type="password" id="signup-setPassword" placeholder="Set Password" name="npsw" id="rpsw" required>
+                <!-- <input type="password" id="signup-confPassword" placeholder="Confirm Password" name="cpsw" required> -->    
+                <button onclick="document.getElementById('modal-wrapper-register').style.display='none'" >Register</button> 
+                <p class="error"></p>
               </div>                     
             </form>
         </div>
 
-        <!-- Navigation Bar -->
-        <nav class="main-nav" id="myTopnav">
-            <a href="#Home" class="active">Home</a>
-            <a href="#ContactUs">Contact</a>
-            <a href="#About">About</a>
-            <a href="#Services">Services</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                <i class="fa fa-bars fa-2x"></i>
-            </a>
-        </nav>
-
-        
+       
 
         <!-- Grid View of companies -->
         <section class="boxes">
             <div class="box">
-                <i class="fab fa-windows fa-4x"></i>
                 <h3>Microsoft</h3>
                 <p>Microsoft Company</p>
                 <a href="#" class="btn">Read More</a>
             </div>
-            <div class="box">
-                    <i class="fab fa-google fa-4x"></i>
-                    <h3>Google</h3>
-                    <p>Google Company</p>
-                    <a href="#" class="btn">Read More</a>
-            </div>
-            <div class="box">
-                    <i class="fab fa-facebook-f fa-4x"></i>
-                    <h3>Facebook</h3>
-                    <p>Facebook Company</p>
-                    <a href="#" class="btn">Read More</a>
-            </div>
-            <div class="box">
-                    <i class="fab fa-amazon fa-4x"></i>
-                    <h3>Amazon</h3>
-                    <p>Amazon Company</p>
-                    <a href="#" class="btn">Read More</a>
-            </div>
-            <div class="box">
-                    <i class="fab fa-apple fa-4x"></i>
-                    <h3>Apple</h3>
-                    <p>Apple Company</p>
-                    <a href="#" class="btn">Read More</a>
-            </div>
+            <a id="add-icon" class="box" style="cursor: pointer;">
+                <i onclick="document.getElementById('add-company-wrapper').style.display='block'" class="fa fa-plus-square fa-6x" aria-hidden="true"></i>
+                <h3 style="cursor: pointer;">Add New</h3>
+            </a>
         </section>
+
+        <!-- add new company form -->
+        <div id="add-company-wrapper" class="modal">
+            <form class="modal-content animate" id="add-company">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('add-company-wrapper').style.display='none'" class="close" title="Close">&times;</span>
+                    <h1 style="text-align:center">Register Company Here</h1>
+                </div>
+
+                <input type="text" id="company-name" placeholder="Company Name" autofocus required>
+                <input type="text" id="qualification" placeholder="Qualification" required>
+                <input type="text" id="package" placeholder="Package" required>
+                <input type="text" id="company-link" placeholder="Company Link" required>
+                <textarea id="bio-text" class="bio-text" placeholder="Small Bio about company" required></textarea>
+                <button onclick="document.getElementById('add-company-wrapper').style.display='none'" >Submit</button>
+                <p class="error"></p>
+            </form>
+        </div>
+
+        <!-- User Profile -->
+    <div class="user-details" id="UserProfile">
+            <h4>User Details</h4>
+        <!-- ADMIN ACTIONS -->
+        <form class="admin-actions admin" style="margin: 40px auto; max-width: 300px; display: block;">
+            <input type="email" placeholder="Add admin's user email" id="admin-email" required />
+            <button class="btn">Make admin</button>
+        </form>
+        
+        <a style="margin-right: 5px" href="#" id="show-username" class="userprofilename"></a>
+    </div>
+
         <!-- Info Section -->
         <section class="info">
             <img src="img/Aditya.jpg" alt="">
@@ -142,6 +176,7 @@
     </div>
     <!-- Wrapper Ends -->
 
+
     <!-- Function for dropdown menu -->
     <script>
         function myFunction() {
@@ -154,44 +189,25 @@
         }
     </script>
 
-    <!-- <script>
-        // If user clicks anywhere outside of the modal, Modal will close    
-        var modal = document.getElementById('modal-wrapper');
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script> -->
-
-    <!-- Show and hide options -->
-    <script type="text/javascript">
-    function showHide(){
-        var studentSelect=document.getElementById("userType-student");
-        var hideIt=document.getElementsByClassName("hide");
-        if(studentSelect.selected){
-            hideIt.style.display="block";
-        }
-        else{
-            hideIt.style.display="none";
-        }
-    }
-    </script>
-    
 
     <script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyA29QfZcI9McnzorPf9X1vDsn-2aUJ5V3s",
-        authDomain: "project02-6374c.firebaseapp.com",
-        databaseURL: "https://project02-6374c.firebaseio.com",
-        projectId: "project02-6374c",
-        storageBucket: "project02-6374c.appspot.com",
-        messagingSenderId: "212019939413"
-    };
-    firebase.initializeApp(config);
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA29QfZcI9McnzorPf9X1vDsn-2aUJ5V3s",
+            authDomain: "project02-6374c.firebaseapp.com",
+            databaseURL: "https://project02-6374c.firebaseio.com",
+            projectId: "project02-6374c"
+        };
+        firebase.initializeApp(config);
+
+        // make auth and firestore references
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const functions = firebase.functions();
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="main.js"></script>
+    <script src="auth.js"></script>
 </body>
 </html>
