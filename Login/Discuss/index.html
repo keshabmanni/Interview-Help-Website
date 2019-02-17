@@ -20,6 +20,13 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
+    <!--For stickey nav bar at top-->
+    <script type="text/javascript">
+        $(window).on('scroll', function() {
+            $(window).scrollTop()? $('nav').addClass('black'):$('nav').removeClass('black');
+        });
+    </script>
+
 </head>
 <body>
     <!-- login and register bar & nav bar-->
@@ -44,15 +51,16 @@
             <div class="logo">Interview Help</div>
             <ul>
                 <li><a href="https://project02-6374c.firebaseapp.com/" >Home</a></li>
-                <li><a href="https://project02-6374c.firebaseapp.com/Discuss">Discuss</a></li>
-                <li><a href="#Profile" class="active">Profile</a></li>
+                <li><a href="#Discuss" class="active">Discuss</a></li>
+                <li><a href="https://project02-6374c.firebaseapp.com/Profile">Profile</a></li>
                 <li><a href="https://project02-6374c.firebaseapp.com/About">About</a></li>
             </ul>
         </nav>
     </div>
 
-    <!--Page Content Wrapper-->
+    <!--Page Content wrapper-->
     <div class="wrapper">
+        <a>Discuss here</a>
         <!-- popup login form -->
         <div id="modal-wrapper-login" class="modal">
   
@@ -99,18 +107,13 @@
                     <!-- <input type="password" id="signup-confPassword" placeholder="Confirm Password" name="cpsw" required> -->    
                     <button onclick="document.getElementById('modal-wrapper-register').style.display='none'" >Register</button> 
                     <p class="error"></p>
+                    <div class="admin-actions admin"></div>
                   </div>                     
                 </form>
             </div>
-        <!-- ADMIN ACTIONS -->
-        <form class="admin-actions admin" style="margin: 40px auto; max-width: 300px; display: block;">
-            <h4>User Details</h4>
-            <input type="email" placeholder="Add admin's user email" id="admin-email" required />
-            <button class="btn">Make admin</button>
-        </form>
-    </div>
-    <!-- Wrapper Ends -->
 
+    </div>
+    <!--wrapper class ends here-->
     <script>
         // Initialize Firebase
         var config = {
@@ -130,5 +133,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="/main.js"></script>
     <script src="/auth.js"></script>
+    
 </body>
 </html>

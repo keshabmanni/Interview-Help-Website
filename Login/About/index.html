@@ -17,16 +17,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
-    
+
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-   
+
 </head>
 <body>
     <!-- login and register bar & nav bar-->
     <div id="global-top-bar">
         <nav> 
             <!--login bar-->
-            <div class="loginAndRegister">
+            <div class="loginAndRegister user-details">
                 <h3>
                     <div class="logged-in" style="display: none">
                         <a style="margin-right: 5px" href="#" id="show-username" class="userprofilename"></a>
@@ -43,47 +43,49 @@
             <a class="burger-nav"></a>
             <div class="logo">Interview Help</div>
             <ul>
-                <li><a href="#Home" class="active">Home</a></li>
+                <li><a href="https://project02-6374c.firebaseapp.com/" >Home</a></li>
                 <li><a href="https://project02-6374c.firebaseapp.com/Discuss">Discuss</a></li>
                 <li><a href="https://project02-6374c.firebaseapp.com/Profile">Profile</a></li>
-                <li><a href="https://project02-6374c.firebaseapp.com/About">About</a></li>
+                <li><a href="#About" class="active">About</a></li>
             </ul>
         </nav>
     </div>
 
-    <!--Page Content-->
+    <!--Page Content wrapper-->
     <div class="wrapper">
+        <p>About</p>
         <!-- popup login form -->
         <div id="modal-wrapper-login" class="modal">
   
             <form class="modal-content animate" id="login-form">
-                  
-              <div class="imgcontainer">
+                    
+                <div class="imgcontainer">
                 <span onclick="document.getElementById('modal-wrapper-login').style.display='none'" class="close" title="Close PopUp">&times;</span>
                 <h1 style="text-align:center">Login Here</h1>
-              </div>
-          
-              <div class="container-login">
+                </div>
+            
+                <div class="container-login">
                 <input type="email" placeholder="Enter Email" name="uname" id="login-email" autofocus required>
                 <input type="password" placeholder="Enter Password" id="login-password" name="psw" required>         
                 <button onclick="document.getElementById('modal-wrapper-login').style.display='none'">Login</button>
                 <input type="checkbox"  style="margin:20px 0px 20px 20px"><a class="rememberMe">Remember me</a>
                 <a href="#" class="forgotPassword" >Forgot Password ?</a>
                 <p class="error"></p>
-              </div>
+                </div>
             </form>  
         </div>
-
+        <!--login form end-->
+        
         <!-- popup register form -->
         <div id="modal-wrapper-register" class="modal">
-  
+    
             <form class="modal-content animate" id="signup-form">      
-              <div class="imgcontainer">
+                <div class="imgcontainer">
                 <span onclick="document.getElementById('modal-wrapper-register').style.display='none'" class="close" title="Close">&times;</span>
                 <h1 style="text-align:center">Register Here</h1>
-              </div>
-          
-              <div class="container-register">
+                </div>
+            
+                <div class="container-register">
                 <input type="email" id="signup-email" placeholder="Email Address" name="fname" autofocus required>
 
                 <!--<div class="userType">
@@ -99,61 +101,13 @@
                 <!-- <input type="password" id="signup-confPassword" placeholder="Confirm Password" name="cpsw" required> -->    
                 <button onclick="document.getElementById('modal-wrapper-register').style.display='none'" >Register</button> 
                 <p class="error"></p>
-              </div>                     
+                </div>                     
             </form>
         </div>
+        <!--register form end-->
 
-        <div class="admin-actions admin"></div> <!--top nav bar is not showinw without these class-->
-
-        <!-- Grid View of companies -->
-        <section class="boxes">
-            <div >
-                <div class="box" id="company-info">
-                    <!--company details codes in companies.js-->
-                </div>
-            </div>
-            
-            <a id="add-icon" class="box" style="cursor: pointer;">
-                <i onclick="document.getElementById('add-company-wrapper').style.display='block'" class="fa fa-plus-square fa-6x" aria-hidden="true"></i>
-                <h3 style="cursor: pointer;">Add New</h3>
-            </a>
-        </section>
-
-        <!-- add new company form -->
-        <div id="add-company-wrapper" class="modal">
-            <form class="modal-content animate" id="add-company">
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('add-company-wrapper').style.display='none'" class="close" title="Close">&times;</span>
-                    <h1 style="text-align:center">Register Company</h1>
-                </div>
-
-                <input type="text" id="company-name" placeholder="Company Name" autofocus required>
-                <input type="text" id="qualification" placeholder="Qualification" required>
-                <input type="text" id="package" placeholder="Package" required>
-                <input type="text" id="company-link" placeholder="Company Link" required>
-                <textarea id="bio-text" class="bio-text" maxlength="35" placeholder="Small Bio(30 characters)" required></textarea>
-                <button onclick="document.getElementById('add-company-wrapper').style.display='none'" >Submit</button>
-                <p class="error"></p>
-            </form>
-        </div>
-
-        <!-- Info Section -->
-        <section class="info">
-            <img src="img/Aditya.jpg" alt="">
-            <div>
-                <h2>Know more about our college</h2>
-                <p>
-                    Demo TextLorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam vel tempore maxime, repudiandae debitis deserunt a. Autem veritatis veniam, optio quia omnis non illo vel reiciendis necessitatibus temporibus corporis possimus.
-                    
-                </p>
-                <a href="https://www.aec.edu.in" class="btn">Visit Site</a>
-            </div>
-        </section>
-        <!-- footer -->
-        <footer>GridDemo &copy; 2018</footer>
     </div>
-    <!-- Wrapper Ends -->
-
+    <!--wrapper class ends here-->
     <script>
         // Initialize Firebase
         var config = {
@@ -173,6 +127,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="/main.js"></script>
     <script src="/auth.js"></script>
-    <script src="/companies.js"></script>
+    
 </body>
 </html>

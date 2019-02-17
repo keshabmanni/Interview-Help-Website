@@ -41,7 +41,7 @@ signupForm.addEventListener('submit',(e) => {
     }).then(() => {
         //close signup form
         const modal = document.querySelector('#modal-wrapper-register');
-        M.Modal.getInstance(modal).close();
+        Modal.getInstance(modal).close(); //M.
         signupForm.reset();
         signupForm.querySelector('.error').innerHTML = ''
     }).catch(err => {
